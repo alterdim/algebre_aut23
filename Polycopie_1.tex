@@ -207,7 +207,7 @@ Or, on sait déjà que $(\alpha_1, \dots, \alpha_n)$ et $(\alpha_1', \dots, \alp
 On peut prouver la propriété 3) de la même façon.
 
 \pagebreak
-\subsection{Définition d'un espace vectoriel}
+\subsection{Définition - Espace vectoriel}
 Un \textbf{espace vectoriel réel} est un ensemble $V$ muni de deux opérations :
 \begin{enumerate}
     \item "addition" : $V \times V \rightarrow V, (v, v') \rightarrow v + v'$
@@ -227,4 +227,91 @@ Ces deux opérations doivent satisfaire une liste d'axiomes pour que l'ensemble 
 \end{itemize}
 
 On appelle les éléments de l'espace vectoriel $V$ des \textbf{vecteurs} et les éléments du corps $K$ sur le quel $V$ est défini des \textbf{scalaires}.
+
+\subsection{Définition - Sous-espace vectoriel}
+Soit $V$ un espace vectoriel sur $\K$ avec $\K = \R$ ou $\K = \C$ . Un sous-ensemble $U \subseteq V$ est dit un sous-espace vectoriel de $V$ si :
+\begin{itemize}
+    \item $\mathbb 0_V \in U$
+    \item $u, u' \in U \Rightarrow u+u' \in U$
+    \item $u \in U \Rightarrow \lambda * u \in U \quad \forall \alpha \in \K$
+\end{itemize}
+
+En d'autres termes, un sous-ensemble de $V$ est un sous-espace vectoriel de $V$ s'il contient $\mathbb 0_V$ et s'il est clos par rapport aux 2 opérations de $V$.
+
+\subsubsection{Exemples de sous-espaces vectoriels}
+a) Comme vu dans l'introduction, l'ensemble des solutions d'un système linéaire homogène à 
+coefficients dans un corps $K$ (on prend $K = \R$ ou $K = \C$) est un espace vectoriel sur $K$.
+\\
+b) $V = \R^2 = \{\vec{(x, y)} : x, y \in \R\}$
+\\
+Plus généralement, $\forall n \geq 1$:
+$$
+\R^n =  \{(x_1, \dots, x_n : x_i \in \R, i = 1, \dots, n)\}
+$$
+est un espace vectoriel muni des opérations d'addition et de multiplication par un scalaire.
+\\
+Un exemple de sous-espace de $\R^n$ : $n=2$. $U \in \R^2$ est un sous-espace vectoriel si :
+\begin{itemize}
+    \item $U=\{\mathbb 0_{R^2}\}$
+    \item $U=\{y=0\}$ ou plus généralement\dots
+    \item $U= \text{ n'importe quelle droite dans } \R^2 \text{ passant par } 0$. 
+\end{itemize}
+
+Dans $\R^2$, les seuls sous-espaces vectoriels sont $\{\zero_{R^2}\}$, $\R^2$ et les droites passant par $\zero_{\R^2}$
+\\
+c) $$\mathbb F = \{\text{fonctions réelles} : f : \R \rightarrow \R \}$$ est un espace vectoriel sur $\R$ pour les opérations suivantes :
+\begin{itemize}
+    \item $f, f' \leftarrow \mathbb F \rightarrow f + f'$ est défini par :
+    $$(f+f')(x)=f(x)+f'(x)$$
+    \item $f \in \mathbb F, \alpha \in \R \rightarrow \alpha \cdot f$ est défini par :$$(\alpha \cdot f)(x) = \alpha \cdot f(x)$$
+\end{itemize} 
+On a des exemples de sous-espaces vectoriels de $\mathbb F$ :
+$$\mathrm P_n \subseteq\mathrm P \subseteq \mathrm C \subseteq \mathbb F $$
+avec $P_n$ les polynômes de degrés $\leq n$, $P$ les polynômes, $C$ les fonctions continues.
+Tous ces sous-espaces respectent les axiomes.
+title: Attention
+
+Définissons $P_{deg \space n}$ l'ensemble des polynômes de degré exactement $n$, $n \geq 1$.
+$P_{deg \space n} \subseteq F$ n'est pas un sous-espace vectoriel de $F$ car il ne contient pas la fonction $\mathbb 0_f$.
+\\
+d) On peut définir les matrices carrées $2*2$ à coefficients réels sur $\R$. Les opérations suivantes sont définies :
+\begin{itemize}
+    \item Addition
+    $$
+    \begin{pmatrix}
+    a & b \\ c & d
+    \end{pmatrix} +\begin{pmatrix}
+    a' & b' \\ c' & d'
+    \end{pmatrix} = \begin{pmatrix}
+    a+a' & b+b' \\ c+c' & d+d'
+    \end{pmatrix}$$
+    \item  Multiplication par un scalaire
+    $$
+    \alpha \cdot \begin{pmatrix}
+    a & b \\ c & d
+    \end{pmatrix} = \begin{pmatrix}
+    \alpha * a &  \alpha *b \\ \alpha*c & \alpha*d
+    \end{pmatrix}
+    $$
+\end{itemize}
+Plus généralement, pour tout $m,n \geq 1$, on note $\mathbb M_{m,n}(\R)$ l'ensemble des matrices de taille $m*n$ là coefficients réels, c'est-à-dire des tableaux à $m$ lignes et $n$ colonnes de la forme
+$$\begin{pmatrix}
+a_{11} & \dots & a_{1n} \\ \vdots & \vdots & \vdots
+\\
+a_{m1} & \cdots & a_{mn}
+\end{pmatrix} 
+$$
+avec $a_{ij} \in \R$ pour $i \in \{1, \dots, m\}, j \in \{1, \dots, n\}$ 
+
+Similairement, $M_{m,n}(K)$ est un espace vectoriel sur $K$. La démonstration est similaire à celle sur $\R$.
+On définit $\mathbb 0_{M_{m,n}(K)}$ comme la matrice $m*n$ dont tous les coefficients sont nuls.
+
+\textbf{Remarque} :
+
+Généralement, le plus petit sous-espace vectoriel contenant $U \cup U'$ est le sous-espace vectoriel noté $U + U'$ appelé **somme** de $U$ et $U'$, défini par :
+$$
+U +U ' = \{u+u' \quad | \quad u \in U, u' \in U'\}$$
+On peut démontrer facilement que $U+U'$ est bien un sous-espace vectoriel de $V$.
+\\
+Suite page 9 du document 22.9.pdf
 \end{document}
