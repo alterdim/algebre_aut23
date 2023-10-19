@@ -190,11 +190,35 @@ a_{i1}(\alpha_1+\alpha_1') + \dots + a_{in}(\alpha_n+\alpha_n')
 $$
 On a remplacé les facteurs $(x_1, \dots, x_n)$ par les solutions supposées.
 Par distributivité, on obtient :
-$$
-a_{i1}\alpha_1 + a_{i1}\alpha_1' + \dots + a_{in}\alpha_n + a_{in}\alpha_n'
+$$\begin{aligned}
+    &a_{i1}\alpha_1 + a_{i1}\alpha_1' + \dots + a_{in}\alpha_n + a_{in}\alpha_n' \\
+    &= (a_{i1}\alpha_{1}+a_{i2}\alpha_2+\dots+a_{in}\alpha_n) + (a_{i1}\alpha_{1}'+\dots+a_{in}\alpha_n') \\
+    &= 0 
+\end{aligned}
 $$
 Or, on sait déjà que $(\alpha_1, \dots, \alpha_n)$ et $(\alpha_1', \dots, \alpha_n')$ sont des solutions. On peut en conclure que leur addition donne également zéro, et que notre solution supposée $(\alpha_1 + \alpha_1', \dots, \alpha_n + \alpha_n')$ en est bien une.
 
 On peut prouver la propriété 3) de la même façon.
 
+\pagebreak
+\subsection{Définition}
+Un \textbf{espace vectoriel réel} est un ensemble $V$ muni de deux opérations :
+\begin{enumerate}
+    \item "addition" : $V \times V \rightarrow V, (v, v') \rightarrow v + v'$
+    \item "multiplication par un scalaire" : $\R \times V \rightarrow V, (\alpha, v) \rightarrow \alpha \cdot v$ 
+\end{enumerate}
+
+Ces deux opérations doivent satisfaire une liste d'axiomes pour que l'ensemble soit un espace vectoriel.
+\begin{itemize}
+    \item $\forall u,w,u \in V$, on a $(u+w)+u=v+(w+u)$, l'associativité de l'addition.
+    \item $\forall u,w \in V, v+w = w+v$, commutativité de l'addition
+    \item Il existe un élément noté $\mathbb 0 \in V$ tel que $\mathbb 0 +v = v \quad \forall v \in V$    
+    \item $\forall v \in V \space \exists -v : v + (-v) = \mathbb 0$
+    \item $\alpha * (u+v) = \alpha*u+\alpha*v \space \forall \alpha \in \R, u,v \in V$
+    \item $(\alpha + \beta) * v = \alpha * v + \beta * v \space \forall \alpha, \beta, \in \R, v \in V$, distributivité de l'addition dans $\R$
+    \item $(\alpha*\beta)*v=\alpha*(\beta*v)$, associativité de la multiplication dans $\R$ par un scalaire.
+    \item $1 \in R : 1*v=v \quad \forall v \in V$ 
+\end{itemize}
+
+On appelle les éléments de l'espace vectoriel $V$ des \textbf{vecteurs} et les éléments du corps $K$ sur le quel $V$ est défini des \textbf{scalaires}.
 \end{document}
