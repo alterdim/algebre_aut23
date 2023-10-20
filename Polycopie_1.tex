@@ -10,6 +10,8 @@
 \usepackage[bb=boondox]{mathalfa}
 
 \usepackage[utf8]{inputenc}
+\usepgfplotslibrary{colorbrewer}
+\pgfplotsset{width=7cm,compat=1.18}
 
 \title{Algèbre Linéaire}
 
@@ -34,6 +36,8 @@ Si vous trouvez une erreur (il y en a (plein)), faites une pull request sur gith
 Liste des cours inclus dans le document :
 \begin{itemize}
     \item Cours du 21.9
+    \item Cours du 22.9
+    \item Cours du 28.9
 \end{itemize}
 \pagebreak
 \tableofcontents
@@ -305,12 +309,180 @@ avec $a_{ij} \in \R$ pour $i \in \{1, \dots, m\}, j \in \{1, \dots, n\}$
 
 Similairement, $M_{m,n}(K)$ est un espace vectoriel sur $K$. La démonstration est similaire à celle sur $\R$.
 On définit $\mathbb 0_{M_{m,n}(K)}$ comme la matrice $m*n$ dont tous les coefficients sont nuls. \\
-\textbf{Remarque} :
-
-Généralement, le plus petit sous-espace vectoriel contenant $U \cup U'$ est le sous-espace vectoriel noté $U + U'$ appelé **somme** de $U$ et $U'$, défini par :
+\subsection{Intersection, union et sous-espaces vectoriels}
+On peut se demander si, étant donnés deux sous-espaces vectoriels d'un espace vectoriel $U, U' \subseteq V$, si 
+$U \cap U'$ et $U \cup U'$ sont des sous-espaces vectoriels de $V$. Nous avons :
+\\
+1) $U \cap U'$ est un sous-espace vectoriel de $V$. En effet, $\zero_V \in U, U' \Rightarrow \zero_V \in U \cap U'$.
+Soient $u_1, u_2 \in U \cap U'$. On a $u_1, u_2 \in U \Rightarrow u_1 + u_2 \in U$ et $u_1, u_2 \in U'$ car $U$ et $U'$ sont des sous-espaces vectoriels.
+Ainsi, $u_1 + u_2 \in U \cap U'$ et  on a bien une addition close sur $U \cap U'$.
+Puisque $U$ et $U'$ sont des sous-espaces vectoriels, on applique la même logique à la multiplication par un scalaire.
+\\
+\subsubsection{Exemple d'union de sous-espaces vectoriels}
+$V = \R^3$ et $U, U'$ deux plans passant par $\zero_{R^3}$. 
+$U = \{(x,y,z) | x + y + z = 0\}$, $U' = \{(x,y,z) | z = 0\}$
+\\
+$U \cap U' = \{(x,y,z) | x + y + z = 0, z = 0\} = \{(x,y,z) | z = 0, y = -x\}$
+\begin{center}
+    % Preamble: \pgfplotsset{width=7cm,compat=1.18}
+\begin{tikzpicture}
+    \begin{axis}[view={60}{30}]
+        \addplot3 [
+            mesh,
+            z buffer=sort,
+            samples=20,
+            domain=-1:0,
+            y domain=0:2*pi,
+        ] (
+    {x},
+    {-x},
+    0
+    );
+    \end{axis}
+    \end{tikzpicture} 
+\end{center}
+2) $U \cup U' \subseteq V$ n'est en général pas un sous-espace vectoriel de $V$.
+Généralement, le plus petit sous-espace vectoriel contenant $U \cup U'$ est le sous-espace vectoriel noté $U + U'$ appelé \textbf{somme} de $U$ et $U'$, défini par :
 $$
 U +U ' = \{u+u' \quad | \quad u \in U, u' \in U'\}$$
 On peut démontrer facilement que $U+U'$ est bien un sous-espace vectoriel de $V$.
+
+\subsection{Propriétés des espaces vectoriels}
+Soit $V$ espace vectoriel réel sur un corps $K$. Alors :
+\begin{enumerate}
+    \item L'élément neutre pour l'addition est unique.
+    \item $\forall v \in V$, l'opposé est unique.
+    \item $\mathbb 0_K \cdot v = \mathbb 0_V \quad \forall v \in V$ 
+    \item $\alpha \cdot \mathbb 0_V = \mathbb 0_V \quad \forall \alpha \in K$
+    \item Si $\alpha * v = \mathbb 0_V$ pour $\alpha \in K, v \in V$, alors $\alpha = \mathbb 0_K$ ou $v \in \mathbb 0_V$
+    \item $\forall v \in V$, son opposé $-v$ satisfait $-v = (-1) * v \in K$
+\end{enumerate}
+
+\subsection{Preuves des propriétés}
+\textbf{Propriété 1}
+Soient deux éléments neutres $\zero_V, \zero_V'$ pour l'addition dans $V$.  On doit montrer que $\zero_V = \zero_V'$.
+On a d'une part $\zero_V + \zero_V' = \zero_V$ car $\zero_V'$ est neutre. On a également $\zero_V + \zero_V' = \zero_V'$ car $\zero_V$ est neutre. On a donc $\zero_V = \zero_V'$.
 \\
-Suite page 9 du document 22.9.pdf
+\textbf{Propriété 2}
+Soient $-v, v'$ deux opposés de $v$. On doit montrer que $-v = v'$.
+Puisque $v'$ est opposé de $v$, on a $v+v' = \zero$. Alors $(-v + v) + v' = -v + \zero = -v$. 
+Donc $v'=-v$.
+\\
+\textbf{Propriété 3}
+On doit montrer que $0_K * v = \zero_V$.
+$0_K*v+v = 0_Kv+ 1_K *v = (0_K + 1_K)*v = 1_K*v = v \Rightarrow 0_K*v = \zero_V$.
+\\
+\textbf{Propriété 4}
+Soit $v \in V$. Calculer $\alpha \cdot \zero_V + \alpha \cdot v = \alpha ( \zero_V + v) = \alpha \cdot v$
+Donc puisque $\zero_V$ est l'élément neutre pour l'addition, $\alpha \cdot \zero_V = \zero_V$.
+\\
+\textbf{Propriété 5}
+Supposons $\alpha *v = \zero_V$. Si $\alpha \neq 0_K$, alors on peut diviser par $\alpha$:
+$\frac 1 \alpha * \alpha * v = \frac 1 \alpha * \zero_V = \zero_V \Rightarrow v = \zero_V$
+\\
+\textbf{Propriété 6}
+Montrons que $-v = (-1)_K*v$.
+Puisqu'on a montré que $-v$ est l'unique opposé de $v$, il suffit de montrer que $-1*v$ est un opposé de $v$.
+$-1*v + v = -1 * v + 1 * v = v * (1 - 1) = v*0_K = \zero_V$. Puisque l'inverse est unique, on a bien $-1*v = -v$.
+
+\section{Chapitre 2 - Groupes, anneaux et corps}
+\subsection{Définition - Groupe}
+Un \textbf{groupe} est un ensemble $G$ muni d'une opération binaire :
+$$
+G \times G \rightarrow G, \quad a,b \rightarrow a \cdot b
+$$
+satisfaisant les axiomes d'associativité, possédant un élément neutre, que tout élément aie un inverse. 
+Si l'opération est en plus commutative $(g \cdot h = h \cdot g)$ alors on dit que le group est \textbf{abélien}.
+\pagebreak
+\subsection{Définition - Anneau}
+Un \textbf{anneau} est un ensemble $A$ muni de deux opérations binaires :
+$$
++ : A \times A \rightarrow A, \quad a,b \rightarrow a + b
+$$
+$$\cdot : A \times A \rightarrow A, \quad a,b \rightarrow a\cdot b$$
+$(A, +)$ est un groupe abélien. 
+La multiplication est associative et il existe un élément neutre pour la multiplication ($1$). 
+La distributivité est vérifiée ($(a+b)\cdot c = ac + bc$).
+Si la multiplication est commutative, on parle d'anneau commutatif. $\mathbb Z$ est un anneau commutatif. $\mathbb M_2(\R)$ est un anneau non-commutatif, puisque la multiplication de matrices n'est pas commutative.
+
+\subsection{Définition - Corps}
+Un \textbf{corps} est un anneau commutatif $K$ tel que $0 \neq 1$. (l'élément neutre pour l'addition n'est pas le même que l'élément neutre pour la multiplication) non-nul de $K$ possède un inverse pour la multiplication.
+On peut aussi dire qu'un corps est un ensemble $K$ muni de deux opérations $+$ et $\cdot$, tel que
+\begin{itemize}
+    \item ($K, +$ ) est un groupe abélien avec l'élément neutre noté $0$
+    \item $(K \backslash \{0\}, \cdot)$ est un groupe abélien avec l'élément neutre  noté $1$ et tel que la distributivité est vérifiée.
+\end{itemize}
+Le corps $\C$ des nombres complexes nous intéresse en particulier.
+
+\subsection{Définition - Complexes}
+On définit $\C$ tel que :
+$$ \C = \{a+ib \quad a,b \in \R \text{ et } i^2 = -1\}$$
+On note $z=a+ib$.
+$a$ est la partie réelle de $z$ et $b$ sa partie imaginaire. On représente souvent les nombres complexes sur le plan, avec leur partie réelle en abscisse et leur partie imaginaire en ordonnée. On peut donc définir un argument et un module.
+
+
+
+\subsubsection{Module de z}
+On écrit le module d'un nombre complexe $z$ comme suit :
+$$|z| = \sqrt{a^2+b^2}$$
+Géométriquement, il correspond à la longueur du vecteur sur le plan des complexes.
+
+\subsubsection{Argument de z}
+$$arg(z) = \alpha \text{ l'angle entre l'axe x et le vecteur z}$$
+
+\subsubsection{Coordonnées polaires}
+On peut écrire $z$ en coordonnées polaires :
+$$z = (r, \alpha)$$
+avec $r=|z|$ et $\alpha = arg(z)$.
+
+On peut aussi écrire :
+$$z = r \cdot (\cos \alpha + i \sin \alpha)$$
+La notation d'Euler est la suivante et est équivalente :
+$$
+z = r \cdot e^{i \alpha}
+$$
+
+\subsubsection{Parties réelles et imaginaires}
+On note $z = Re(z) + Im(z)*i$ avec $Re(z) = r \cos \alpha$, $Im(z) = r \sin \alpha$.
+Il est à noter que $Re(z), Im(z) \in \R$ et pas $\C$.
+
+\subsubsection{Conjugué de z}
+Le conjugué de $z = a + bi$ est égal à $\bar z = a - bi$.
+Il a plusieurs propriétés :
+\begin{itemize}
+    \item $\bar{z+w} = \bar z + \bar w$
+    \item $\bar{z \cdot w} = \bar z \cdot \bar w$
+\end{itemize}
+
+\subsubsection{Inverse de z}
+On peut calculer l'inverse de $z$ comme suit :
+$$
+z^{-1} = \frac{\bar z}{|z|^2}
+$$
+\subsubsection{Preuve de l'inverse de z}
+On veut démontrer $z * \bar z = |z|^2$, donc que $z*\frac{\bar z}{|z|^2}=1$.
+Puisque 1 est l'élément neutre de la multiplication dans $C$, $\frac{\bar z}{|z|^2}$ est bien l'inverse de $z$.
+
+\subsection{Théorème - C est un corps}
+$\C$ muni des opérations d'addition et de multiplication de nombres complexes est un corps.
+\subsubsection{Preuve - C est un corps}
+$(\C, +)$ possède le neutre $0$. C'est un groupe abélien.
+$(\C \backslash \{0\}, \cdot)$ est un groupe par le Corollaire. On peut vérifier
+que ce groupe est aussi abélien. Et la distributivité est aussi vérifiée.
+
+\[
+\begin{aligned}
+    (a+bi) + (c + di ) &= (a+c) + (b+d)i
+     \\
+     (a+bi) \cdot (c + di) &= (ac-bd) + (ad+bc)i
+\end{aligned}
+\]
+Ainsi, on peut établir :
+\[
+\begin{aligned}
+    Re(z + z') = Re(z) + Re(z')
+     \\
+    Im(z + z') = Im(z) + Im(z')
+\end{aligned}
+\]
 \end{document}
